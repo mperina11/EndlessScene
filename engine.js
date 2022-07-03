@@ -25,7 +25,7 @@ function setup() {
   label.html("World key: ");
   label.parent("container");
 
-  let input = createInput("cm147");
+  let input = createInput("tulip");
   input.parent(label);
   input.input(() => {
     rebuildWorld(input.value());

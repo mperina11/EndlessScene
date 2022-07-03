@@ -45,9 +45,59 @@ function p3_tileClicked(i, j) {
 
 function p3_drawBefore() {}
 
+function drawGrass(i, j) {
+  push();
+  fill('green');
+  beginShape();
+  vertex(0, 0);
+  vertex(0, tw);
+  vertex(th, tw);
+  vertex(th, 0);
+  endShape(CLOSE);
+
+  pop();
+}
+
+function drawTulip() {
+  push();
+
+  fill('blue');
+  beginShape();
+  vertex(0, 0);
+  vertex(0, tw);
+  vertex(th, tw);
+  vertex(th, 0);
+  endShape(CLOSE);
+
+  fill('blue');
+  circle(i-5, j-5, 15);
+  circle(i+5, j-5, 15);
+  circle(i-5, j-2, 15);
+  circle(i+5, j-2, 15);
+
+  noStroke();
+  fill('yellow');
+  circle(i, j-2, 10);
+  pop();
+}
+
+function placeTulip(i,j) {
+  fill('red');
+  circle(i-5, j-5, 15);
+  circle(i+5, j-5, 15);
+  circle(i-5, j-2, 15);
+  circle(i+5, j-2, 15);
+
+  noStroke();
+  fill('green');
+  circle(i, j-2, 10);
+}
+
 function p3_drawTile(i, j) {
   noStroke();
-  fill(noise(i, j) * 255);
+  // fill(noise(i, j) * 225);
+  fill(noise(i,j));
+  fill('#694130');
 
   push();
 
@@ -58,10 +108,18 @@ function p3_drawTile(i, j) {
   vertex(th, 0);
   endShape(CLOSE);
 
+  if (noise(i,j) > 0.7) {
+    drawGrass(th/2, tw/2);
+  }
+  // if (noise(i,j) < 0.4) {
+  //   drawTulip(th/2, tw/2);
+  // }
+
   let n = clicks[[i, j]] | 0;
   if (n % 2 == 1) {
-    fill(255, 255, 0, 180);
-    ellipse(th/2, tw/2, 10, 10);
+    // fill(255, 255, 0, 180);
+    // ellipse(th/2, tw/2, 10, 10);
+    placeTulip(th/2, tw/2);
   }
 
   pop();
